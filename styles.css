@@ -1,9 +1,13 @@
 #board {
   font-family: monospace;
   background-color: #9e8d68;
-  margin: 0;
+  margin: 10px 10px 10px 0;
   padding: 0;
-  position: relative;
+  width: 80%  ;
+  height: 90%;
+  display: inline;
+  border: 1px solid black;
+  float: right;
 }
 
 .post-it {
@@ -17,7 +21,8 @@
 .post-it .header {
   background-color: #c2c25b;
   text-align: right;
-  padding: 2px;
+  padding: 0px;
+
 }
 
 .post-it .header:hover {
@@ -42,5 +47,43 @@
 
 .close {
   width: 10%;
-  margin-left: 90%;
+  margin-left: 85%;
+}
+
+.header {
+  margin-top: 0;
+}
+
+
+/*-------- HTML element css ---------*/
+body, header, nav, footer, div {
+  margin: 10px 10px 0 10px;
+}
+
+header {
+  border: 1px solid black;
+  text-align: center;
+}
+
+nav {
+  border: 1px solid black;
+  width: 15%;
+  height: 90%;
+  display: inline;
+  float: left;
+}
+
+nav ul {
+  list-style: none;
+  padding-left: 10px;
+}
+
+nav ul li {
+  margin: 10px;
+  text-decoration: none;
+}
+
+button {
+  margin: 13px;
+  border-bottom: 1px solid black;
 }
