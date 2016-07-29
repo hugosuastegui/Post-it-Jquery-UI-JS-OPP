@@ -1,4 +1,4 @@
-#board {
+.board {
   font-family: monospace;
   background-color: #9e8d68;
   margin: 10px 10px 10px 0;
@@ -8,6 +8,7 @@
   display: inline;
   border: 1px solid black;
   float: right;
+  visibility: hidden;
 }
 
 .post-it {

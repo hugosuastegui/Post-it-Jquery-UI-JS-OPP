@@ -1,50 +1,68 @@
-$(function() {
+$(document).ready(function(){
   // Esta es la fucnión que correrá cuando este listo el DOM 
   $("#button").click(function(){
     var title = prompt("Please enter the new board's title")
     if (title != null) {
-      var board = new Board("#board", title)
-      $("#menu").append("<li><a id='link' href=''>" + board.element + "</a></li>")
+      var board = new Board(".board", title)
+      $("#menu").append("<li><a id='link_"+ board.id +"' class='link' href=''>" + board.element + "</a></li>")
     }
-  })
+  });
+
+  $("body").on('click', '.link', function(event){
+    event.preventDefault();
+    var id_content = $(this).attr("id")
+    id_number = id_content.substr(id_content.length - 1);
+    $("#" + id_number).css("visibility", "visible");
+  });
+
 });
 
 
 
 counter = 0;
 
-var Board = function(selector, title) {
+var Board = function(selector, element) {
   // Aqui deberá ir el código que tenga que ver con tu tablero 
   
   // Utiliza esta sintaxis para referirte al selector que representa al tablero.
   // De esta manera no dependerás tanto de tu HTML.  
   var $elem = $(selector);
-  this.element = title;
+  console.log($elem);
+  this.id = counter++;
+  this.element = element;
   this.postits = [];
   postits = this.postits;
   board = this;
-  console.log("BOARD");
-  console.log(this);
 
   function save(postits){
     console.log("SAVE SAVE")
-    console.log(board)
+    // console.log(board)
     board.postits = postits
     console.log(board)
   }
 
   function initialize() {
     // Que debe de pasar cuando se crea un nuevo tablero?
-    $elem.dblclick(function(event){
-      var target = $(event.target);
-      if (target.is($elem)){      
-      var x = event.clientX;
-      var y = event.clientY;
-      var postit = new PostIt(x, y);
-      postits.push(postit);
-    } 
+    $("#append_board").append("<div id='"+board.id+"'class='board'></div>")
+    $("body").on("dblclick", $elem, function(event){
+      // var target = $(event.target);
+      // console.log(target);
+      // if (target.is($elem)){    
+        console.log("IN dblclick")  
+        var x = event.clientX;
+        var y = event.clientY;
+        console.log(x);
+        console.log(y);
+        var postit = new PostIt(x, y);
+        console.log(postit);
+        postits.push(postit);
+        console.log(postits);
+      // } 
+        console.log("ELEM")
+        console.log($elem);
 
-      $elem.append(postit.element)
+      $("#"+counter).append(postit.element)
+
       $(".header").on("mousedown", function(){
          $(".post-it").draggable({});
       })
@@ -59,10 +77,10 @@ var Board = function(selector, title) {
         
         var ind;
         $.each(postits, function(index, value){
-          console.log("Index en each");
-          console.log(index);
-          console.log("Value id en each");
-          console.log(value.id);
+          // console.log("Index en each");
+          // console.log(index);
+          // console.log("Value id en each");
+          // console.log(value.id);
           if (value.id == id){
             ind = value;
           }
